@@ -1,4 +1,4 @@
-package com.FreeMess.JavaMessagePlatform;
+package com.websocket.java_message_platform;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

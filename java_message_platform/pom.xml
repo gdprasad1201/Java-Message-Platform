@@ -8,11 +8,11 @@
 		<version>3.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.FreeMess</groupId>
-	<artifactId>JavaMessagePlatform</artifactId>
+	<groupId>com.websocket</groupId>
+	<artifactId>java_message_platform</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>JavaMessagePlatform</name>
-	<description>Demo project for Spring Boot</description>
+	<name>java_message_platform</name>
+	<description>Java Message Platform</description>
 	<url/>
 	<licenses>
 		<license/>
