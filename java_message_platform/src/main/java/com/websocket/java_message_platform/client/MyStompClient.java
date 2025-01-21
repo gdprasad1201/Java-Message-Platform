@@ -9,15 +9,17 @@ import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
+import com.websocket.java_message_platform.Message;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class StompClient {
+public class MyStompClient {
     private StompSession session;
     private String username;
 
-    public StompClient(String username) {
+    public MyStompClient(String username) throws InterruptedException, ExecutionException {
         this.username = username;
 
         List<Transport> transports = new ArrayList<>();
@@ -26,5 +28,24 @@ public class StompClient {
         SockJsClient sockJsClient = new SockJsClient(transports);
         WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
         stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+
+        StompSessionHandler sessionHandler = new MyStompSessionHandler(username);
+        String url = "ws://localhost:8080/ws"; // URL to connect to the WebSocket server
+
+        session = stompClient.connectAsync(url, sessionHandler).get();
+    }
+
+    public void sendMessage(Message message) {
+        try {
+            session.send("/app/message", message);
+            System.out.println("Message Sent: " + message.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void disconnectUser(String username) {
+        session.send("/app/disconnect", username);
+        System.out.println("Disconnect User: " + username);
     }
 }
